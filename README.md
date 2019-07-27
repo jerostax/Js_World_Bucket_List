@@ -1,4 +1,4 @@
-## Project JavaScript World Bucjet List
+## Project JavaScript World Bucket List
 
 `npm run start`
 `npm run build`
@@ -11,7 +11,7 @@
   `npm i -D webpack`
 - On installe webpack dev server
   `npm i -D webpack-dev-server`
-- On créer le fichier webpack.config.js et on le setup
+- On créé le fichier webpack.config.js et on le setup
 - On setup les script build et start dans package.json
 
 ```js
