@@ -5,11 +5,14 @@ function initMap() {
     center: { lat: 48.855262, lng: 2.346055 },
     zoom: 2.5
   });
+}
+
+function addMarkerOnMap(dream) {
   const marker = new google.maps.Marker({
-    position: { lat: 48.855262, lng: 2.346055 },
+    position: dream.coordinates,
     map: map,
-    icon: 'assets/marker.png'
+    icon: dream.done ? 'assets/marker-done.png' : 'assets/marker.png'
   });
 }
 
-export { initMap };
+export { initMap, addMarkerOnMap };
