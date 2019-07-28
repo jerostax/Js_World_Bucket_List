@@ -34,3 +34,6 @@ body {
   height: 100%;
   background: #eee;
 }
+.card {
+  margin: 20px;
+}
