@@ -1,5 +1,5 @@
 import { data } from './data';
-import { addMarkerOnMap } from './map';
+import { addMarkerOnMap, visitDreamOnMap } from './map';
 
 const dreamsContainer = document.querySelector('#dreams-container');
 
@@ -11,12 +11,14 @@ function buildAllDreams() {
   }
   // Ici on construits nos rêves existant
   data.forEach(buildOneDream);
-
-  function buildOneDream(dream) {
-    // On créer un élèment dream avec le code html qu'on veux
-    const dreamElement = document.createElement('div');
-    // On fais notre template HTML avec nos datas
-    dreamElement.innerHTML = ` <div class="card text-center">
+  // Ici on écoute les clicks sur nos dreams
+  addDreamsListeners();
+}
+function buildOneDream(dream) {
+  // On créer un élèment dream avec le code html qu'on veux
+  const dreamElement = document.createElement('div');
+  // On fais notre template HTML avec nos datas
+  dreamElement.innerHTML = ` <div class="card text-center" id=${dream.id}>
             <h4 class="card-header font-weight-bold">
               ${dream.description}
             </h4>
@@ -33,20 +35,38 @@ function buildAllDreams() {
               </a>
             </div>
             <div class="card-footer text-muted text-right">
-              <a href="" class="btn btn-outline-secondary btn-sm mr-1"
+              <a href="" class="button-visit btn btn-outline-secondary btn-sm mr-1"
                 >Visiter</a
-              ><a href=${dream.link} class="btn btn btn-outline-dark btn-sm">
+              ><a href=${
+                dream.link
+              } target="_blank" class="btn btn btn-outline-dark btn-sm">
                 Plus d'infos
               </a>
             </div>
           </div>`;
 
-    // On ajoute notre template HTML en enfant du dreamsContainer
-    dreamsContainer.appendChild(dreamElement);
+  // On ajoute notre template HTML en enfant du dreamsContainer
+  dreamsContainer.appendChild(dreamElement);
 
-    // On construit le Marker sur la map
-    addMarkerOnMap(dream);
-  }
+  // On construit le Marker sur la map
+  addMarkerOnMap(dream);
+}
+
+function addDreamsListeners() {
+  // On obtient un NodeList avec tous les bouttons ayant la classe btn-visit donc on forEach dessus
+  document.querySelectorAll('.button-visit').forEach(item => {
+    item.addEventListener('click', event => {
+      // A chaque fois qu'un btn est cliqué j'extrais l'id de mon élément et j'éxévute visitDream
+      visitDream(item.parentElement.parentElement.getAttribute('id'));
+    });
+  });
+}
+
+function visitDream(dreamId) {
+  // On filtre pour trouver le dream qui à l'id passé en argument et avoir accès à sa position
+  let position = data.filter(item => item.id == dreamId)[0].coordinates;
+  console.log('DREAM ID', position);
+  visitDreamOnMap(position);
 }
 
 export { buildAllDreams };

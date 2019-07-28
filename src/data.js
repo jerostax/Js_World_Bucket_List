@@ -7,8 +7,8 @@ const data = [
     link:
       'https://bresil.marcovasco.fr/voyage-rio-de-janeiro.html?gclid=Cj0KCQjwj_XpBRCCARIsAItJiuRdV7I3ZG0EKzSg6aud1J5f6mLkyx9R-fBENwkDIC16dvs82cjNt3gaAk3VEALw_wcB',
     coordinates: {
-      lat: -22.951891,
-      lng: -43.210494
+      lat: -22.951868,
+      lng: -43.210114
     }
   },
   {
