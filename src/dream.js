@@ -18,7 +18,7 @@ function buildOneDream(dream) {
   // On créer un élèment dream avec le code html qu'on veux
   const dreamElement = document.createElement('div');
   // On fais notre template HTML avec nos datas
-  dreamElement.innerHTML = ` <div class="card text-center" id=${dream.id}>
+  dreamElement.innerHTML = ` <div class="card text-center" id='${dream.id}'>
             <h4 class="card-header font-weight-bold">
               ${dream.description}
             </h4>
@@ -28,7 +28,7 @@ function buildOneDream(dream) {
               alt="Image de voyage"
             />
             <div class="card-body">
-              <a href="" class="btn btn-${
+              <a href="" class="button-action btn btn-${
                 dream.done ? 'secondary' : 'danger'
               } btn-block font-weight-bold">
                 ${dream.done ? 'Je veux le refaire' : 'Je me lance !'} 
@@ -60,6 +60,14 @@ function addDreamsListeners() {
       visitDream(item.parentElement.parentElement.getAttribute('id'));
     });
   });
+  document.querySelectorAll('.button-action').forEach(item => {
+    item.addEventListener('click', event => {
+      // A chaque fois qu'un btn est cliqué j'extrais l'id de mon élément et j'éxévute visitDream
+      toggleDreamDone(item.parentElement.parentElement.getAttribute('id'));
+      // Permet de rafraichir la carte après avoir cliqué
+      buildAllDreams();
+    });
+  });
 }
 
 function visitDream(dreamId) {
@@ -67,6 +75,11 @@ function visitDream(dreamId) {
   let position = data.filter(item => item.id == dreamId)[0].coordinates;
   console.log('DREAM ID', position);
   visitDreamOnMap(position);
+}
+
+function toggleDreamDone(dreamId) {
+  let dream = data.filter(item => item.id == dreamId)[0];
+  dream.done = !dream.done;
 }
 
 export { buildAllDreams };

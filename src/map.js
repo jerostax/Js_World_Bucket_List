@@ -1,9 +1,9 @@
 let map;
 let panorama;
-const panoramaElement = document.querySelector('#panorama');
-
 const resetMapButton = document.querySelector('#reset-map');
 const backToMapButton = document.querySelector('#back-to-map');
+const panoramaElement = document.querySelector('#panorama');
+
 // On initialise la Google Map
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
